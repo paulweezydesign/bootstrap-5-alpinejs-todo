@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <script src="main.js"></script>
+  </head>
+
+  <body class="p-4">
+    <div
+      x-data="{
+  name: 'Things to do',
+  current: '',
+  list: ['Front end project', 'Cat site', 'Study Javascript', ],
+  count: 0,
+  add() {this.list.push(this.current)},
+  remove(item) {this.list.splice(this.list.indexOf(item), 1)}
+}"
+      class="container mt-4"
+    >
+      <h1 x-text="name"></h1>
+      <div class="input-group mb-3">
+        <input x-model="current" type="text" class="form-control" />
+        <button x-on:click="add" class="btn btn-primary position-relative">
+          add
+          <span
+            x-text="list.length"
+            class="
+              position-absolute
+              top-0
+              start-100
+              translate-middle
+              badge
+              rounded-pill
+              bg-danger
+            "
+          >
+          </span>
+        </button>
+      </div>
+      <ul class="list-group">
+        <template x-for="item in list">
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-center
+            "
+          >
+            <span x-text="item"></span>
+            <button
+              @click="remove(item)"
+              type="button"
+              class="btn btn-sm btn-danger btn-small"
+            >
+              &times;
+            </button>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </body>
+</html>
